@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description"
+        content="Elevating brands through premium design, robust development, and high-conversion digital architectures. Explore my featured projects and services.">
+    <title>Sahinur Rahaman | Digital Solutions Architect</title>
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Sahinur Rahaman | Digital Solutions Architect">
+    <meta property="og:description"
+        content="Elevating brands through premium design, robust development, and high-conversion digital architectures.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sahinur567.github.io/personal-portfolio/">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css?v=21">
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- Cinematic Preloader -->
+    <div id="preloader">
+        <div class="pl-logo">SAHINUR<span class="dot">.</span></div>
+        <div class="pl-bar">
+            <div class="pl-fill" id="pl-fill"></div>
+        </div>
+    </div>
+
+    <!-- Background Image Sequence -->
+    <canvas id="sequence-canvas"></canvas>
+    <div class="seq-overlay"></div>
+
+    <!-- 3D Canvas Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Overlay UI -->
+    <div class="grain-overlay"></div>
+
+    <nav class="navbar">
+        <div class="logo">SAHINUR<span class="dot">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact" class="btn-primary magnetic" data-magnetic>Let's Talk</a></li>
+        </ul>
+        <div class="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero section-padding">
+            <div class="hero-content">
+                <h2 class="subtitle">Digital Craftsman</h2>
+                <h1 class="title">I build <span class="gradient-text">Future-Ready</span> digital experiences.</h1>
+                <p class="description">Elevating brands through premium design and robust development engineered for
+                    high conversion.</p>
+                <div class="cta-group">
+                    <a href="#work" class="btn-primary cta magnetic" data-magnetic>View My Work</a>
+                    <a href="#contact" class="btn-secondary cta magnetic" data-magnetic>Contact Me</a>
+                </div>
+            </div>
+
+            <div class="data-bar reveal">
+                <div class="db-item">
+                    <div class="db-val">150+</div>
+                    <div class="db-lbl">Systems Deployed</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-val">8.8x</div>
+                    <div class="db-lbl">Avg Target ROAS</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-val">98%</div>
+                    <div class="db-lbl">Client Retention</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-val">5.0&#9733;</div>
+                    <div class="db-lbl">Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services section-padding">
+            <div class="section-header">
+                <h2>Expertise <span class="gradient-text">& Services</span></h2>
+                <p>Delivering cutting-edge solutions designed to scale and convert.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="glass-card service-card">
+                    <div class="icon">&#x1F4BB;</div>
+                    <h3>Full-Stack Development</h3>
+                    <p>Building highly performant, scalable, and secure web applications using modern frameworks and
+                        architectures.</p>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="icon">&#x2728;</div>
+                    <h3>Premium UI/UX</h3>
+                    <p>Designing user-centric, aesthetically stunning interfaces that captivate users and drive
+                        engagement.</p>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="icon">&#x1F680;</div>
+                    <h3>Conversion Optimization</h3>
+                    <p>Implementing data-driven strategies and persuasive design to turn visitors into loyal clients.
+                    </p>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="icon">&#x1F9CA;</div>
+                    <h3>Digital Architecture</h3>
+                    <p>Building high-performance, robust web foundations and ecosystems tailored to your exact business
+                        logic.</p>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="icon">&#x1F4F1;</div>
+                    <h3>Mobile App Development</h3>
+                    <p>Bespoke, high-performance cross-platform mobile architectures engineered for your exact
+                        operational needs.</p>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="icon">&#x1F4C8;</div>
+                    <h3>Social Media Management</h3>
+                    <p>Aggressive viral mechanics and psychological branding to scale audience retention and engagement.
+                    </p>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="icon">&#x1F6D2;</div>
+                    <h3>E-Commerce SEO &amp; Uploading</h3>
+                    <p>Massive product catalog migrations and precision SEO optimization for immediate organic search
+                        dominance.</p>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="icon">&#x2699;&#xFE0F;</div>
+                    <h3>API &amp; Integrations</h3>
+                    <p>Seamlessly connecting third-party services and custom APIs to extend your platform's
+                        capabilities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="work section-padding">
+            <div class="section-header">
+                <h2>Featured <span class="gradient-text">Projects</span></h2>
+                <p>A selection of premium digital products and brand experiences.</p>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- Project 1 -->
+                <div class="glass-card project-card">
+                    <div class="project-image-placeholder"
+                        style="background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="project-info">
+                        <h3>Ormos Sofas</h3>
+                        <a href="https://sahinur567.github.io/personal-portfolio/" target="_blank" class="project-link">Explore Website
+                            &#x2197;</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card project-card">
+                    <div class="project-image-placeholder"
+                        style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="project-info">
+                        <h3>Hogladih</h3>
+                        <a href="https://sahinur567.github.io/personal-portfolio/" target="_blank" class="project-link">Explore Website
+                            &#x2197;</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="glass-card project-card">
+                    <div class="project-image-placeholder"
+                        style="background-image: url('https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="project-info">
+                        <h3>Proyecto Mucor</h3>
+                        <a href="https://sahinur567.github.io/personal-portfolio/" target="_blank" class="project-link">Explore Website
+                            &#x2197;</a>
+                    </div>
+                </div>
+
+
+                <!-- Project 3 -->
+                <div class="glass-card project-card">
+                    <div class="project-image-placeholder"
+                        style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="project-info">
+                        <h3>KM Cleaners</h3>
+                        <a href="https://kmcleaners.com.au/" target="_blank" class="project-link">Explore Website
+                            &#x2197;</a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="glass-card project-card">
+                    <div class="project-image-placeholder"
+                        style="background-image: url('https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=600&q=80');">
+                    </div>
+                    <div class="project-info">
+                        <h3>Odor Parfums</h3>
+                        <a href="https://www.odorparfums.com/" target="_blank" class="project-link">Explore Website
+                            &#x2197;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: 80px;">
+                <h2>Generative <span class="gradient-text">Engine</span></h2>
+                <p>Advanced cinematic AI-generated videos engineered for retention and scale.</p>
+            </div>
+
+            <div class="video-grid">
+                <div class="glass-card video-card">
+                    <video autoplay loop muted playsinline class="ai-vid">
+                        <source src="assets/videos/video1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="glass-card video-card">
+                    <video autoplay loop muted playsinline class="ai-vid">
+                        <source src="assets/videos/video2.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section-padding">
+            <div class="glass-card contact-container">
+                <div class="contact-text">
+                    <h2>Ready to build the <span class="gradient-text">Future?</span></h2>
+                    <p>Let's collaborate on your next big project and create something extraordinary together.</p>
+                    <div class="contact-details">
+                        <p>&#x2709;&#xFE0F; sahinurrahaman567@gmail.com</p>
+                        <p>&#x1F4CD; Worldwide Remote</p>
+                        <a href="https://wa.me/918653368959" target="_blank" class="btn-secondary"
+                            style="margin-top: 20px;">&#x1F4AC; Chat on WhatsApp</a>
+                    </div>
+                </div>
+                <form id="contact-form" action="https://formspree.io/f/xldnzeab" method="POST" class="contact-form">
+                    <div class="input-group">
+                        <input type="text" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea name="message" rows="5" placeholder="Tell me about your project..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full magnetic" data-magnetic>Send Message</button>
+                    <div id="form-status"
+                        style="display: none; margin-top: 15px; font-family: var(--font-body); font-weight: 300;"></div>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Sahinur. All Rights Reserved. Crafted for impact.</p>
+        </footer>
+    </main>
+
+    <!-- Libraries -->
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Three.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="scene.js?v=5"></script>
+    <script src="main.js?v=22"></script>
+</body>
+
+</html>
