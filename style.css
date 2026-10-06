@@ -597,35 +597,6 @@ main {
     background: rgba(239, 68, 68, 0.12);
 }
 
-/* Flagship highlight for flagship offerings */
-.service-card.flagship {
-    border-color: rgba(239, 68, 68, 0.2);
-    background: linear-gradient(145deg, rgba(239, 68, 68, 0.08) 0%, rgba(10, 10, 14, 0.6) 100%);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-.service-card.flagship::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    pointer-events: none;
-    background: radial-gradient(circle at 20% 15%, rgba(239, 68, 68, 0.15) 0%, transparent 65%);
-    opacity: 0.7;
-    transition: opacity 0.4s ease;
-}
-
-.service-card.flagship:hover::after {
-    opacity: 1;
-}
-
-.service-card.flagship .service-badge {
-    background: rgba(239, 68, 68, 0.16);
-    color: #fca5a5;
-    border-color: rgba(239, 68, 68, 0.35);
-    box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
-}
-
 .service-card h3 {
     font-size: 1.22rem;
     margin-bottom: 12px;
@@ -669,12 +640,6 @@ main {
     color: var(--text-primary);
     border-color: rgba(255, 255, 255, 0.16);
     background: rgba(255, 255, 255, 0.06);
-}
-
-.service-card.flagship:hover .tech-pill {
-    border-color: rgba(239, 68, 68, 0.25);
-    background: rgba(239, 68, 68, 0.08);
-    color: #fff;
 }
 
 /* ==========================================================================
