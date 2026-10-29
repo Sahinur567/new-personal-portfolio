@@ -517,6 +517,10 @@ main {
     .services-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .services-grid > .service-card:nth-child(10):last-child {
+        grid-column: 2;
+    }
 }
 
 .service-card {
