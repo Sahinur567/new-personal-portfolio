@@ -647,6 +647,335 @@ main {
 }
 
 /* ==========================================================================
+   Flagship Enterprise Case Study (SDBiometrix)
+   ========================================================================== */
+.flagship-case-study {
+    padding: 44px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 55px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(135deg, rgba(16, 16, 24, 0.75) 0%, rgba(8, 8, 12, 0.9) 100%);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.flagship-case-study:hover {
+    border-color: rgba(239, 68, 68, 0.35);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 80px rgba(239, 68, 68, 0.12);
+}
+
+.flagship-case-study::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-accent);
+}
+
+.fcs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 46px;
+    align-items: start;
+}
+
+/* Media Column */
+.fcs-media-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.fcs-image-wrapper {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #09090d;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+.fcs-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform var(--transition-smooth);
+}
+
+.flagship-case-study:hover .fcs-image {
+    transform: scale(1.03);
+}
+
+.fcs-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(5, 5, 8, 0.4) 100%);
+    pointer-events: none;
+}
+
+.fcs-status-pill {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(10, 10, 14, 0.85);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #86efac;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    animation: pulseDot 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes pulseDot {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* Telemetry Row */
+.fcs-telemetry-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 16px 14px;
+}
+
+.fcs-stat-item {
+    text-align: center;
+}
+
+.fcs-stat-val {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 3px;
+}
+
+.fcs-stat-lbl {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+/* Content Column */
+.fcs-content-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.fcs-badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.fcs-badge {
+    font-size: 0.7rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fcs-badge.category {
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--accent-light);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.fcs-badge.saas {
+    background: rgba(249, 115, 22, 0.1);
+    color: #fdba74;
+    border-color: rgba(249, 115, 22, 0.25);
+}
+
+.fcs-badge.compliance {
+    background: rgba(59, 130, 246, 0.1);
+    color: #93c5fd;
+    border-color: rgba(59, 130, 246, 0.25);
+}
+
+.fcs-title {
+    font-size: clamp(1.4rem, 2.3vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 14px;
+}
+
+.fcs-title .fcs-version {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.fcs-overview {
+    color: var(--text-secondary);
+    font-size: 0.94rem;
+    line-height: 1.68;
+    margin-bottom: 24px;
+    font-weight: 300;
+}
+
+.fcs-section-title {
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+/* Highlights Grid */
+.fcs-highlights {
+    margin-bottom: 24px;
+}
+
+.fcs-highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.fcs-highlight-card {
+    display: flex;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px 15px;
+    transition: all var(--transition-fast);
+}
+
+.fcs-highlight-card:hover {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.04);
+    transform: translateY(-2px);
+}
+
+.fcs-hl-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.fcs-hl-content h5 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.fcs-hl-content p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Tech Section */
+.fcs-tech-section {
+    margin-bottom: 28px;
+}
+
+.fcs-tech-section .tech-pills {
+    padding-top: 0;
+    border-top: none;
+}
+
+/* CTA Group */
+.fcs-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.fcs-btn {
+    padding: 12px 28px;
+    font-size: 0.9rem;
+    gap: 8px;
+}
+
+.fcs-btn .btn-icon {
+    font-size: 1rem;
+    transition: transform var(--transition-fast);
+}
+
+.fcs-btn:hover .btn-icon {
+    transform: translate(3px, -3px);
+}
+
+/* Section Subheader for secondary project grid */
+.section-subheader {
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+
+.section-subheader h3 {
+    font-size: 1.45rem;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+}
+
+.section-subheader p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+
+/* ==========================================================================
    Projects Grid
    ========================================================================== */
 .projects-grid {
@@ -847,10 +1176,26 @@ footer {
     }
 }
 
+@media (max-width:1080px) {
+    .fcs-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .flagship-case-study {
+        padding: 34px 26px;
+    }
+}
+
 @media (max-width:768px) {
     .flagship-case-study {
-        padding: 26px 18px;
+        padding: 24px 16px;
         margin-bottom: 36px;
+        border-radius: 16px;
+    }
+
+    .fcs-title {
+        font-size: 1.35rem;
     }
 
     .fcs-highlights-grid {
@@ -859,22 +1204,29 @@ footer {
     }
 
     .fcs-telemetry-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 12px 10px;
     }
 
-    .fcs-stat-item:last-child {
-        grid-column: span 2;
+    .fcs-stat-val {
+        font-size: 1.15rem;
+    }
+
+    .fcs-stat-lbl {
+        font-size: 0.6rem;
     }
 
     .fcs-cta-group {
         flex-direction: column;
         width: 100%;
+        gap: 10px;
     }
 
     .fcs-cta-group .fcs-btn {
         width: 100%;
         justify-content: center;
+        padding: 13px 20px;
     }
     .nav-links {
         position: fixed;
@@ -1077,4 +1429,104 @@ body.custom-cursor-active {
 
 .char {
     display: inline-block;
+}
+@media (max-width:480px) {
+    .flagship-case-study {
+        padding: 20px 14px;
+        margin-bottom: 28px;
+        border-radius: 14px;
+    }
+
+    .fcs-status-pill {
+        top: 10px;
+        left: 10px;
+        padding: 5px 11px;
+        font-size: 0.65rem;
+    }
+
+    .fcs-telemetry-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px 14px;
+    }
+
+    .fcs-stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 4px 2px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .fcs-stat-item:last-child {
+        border-bottom: none;
+    }
+
+    .fcs-stat-lbl {
+        font-size: 0.68rem;
+        order: 1;
+    }
+
+    .fcs-stat-val {
+        font-size: 1.15rem;
+        margin-bottom: 0;
+        order: 2;
+    }
+
+    .fcs-badge-group {
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+
+    .fcs-badge {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+        line-height: 1.3;
+    }
+
+    .fcs-title {
+        font-size: 1.22rem;
+        line-height: 1.35;
+        margin-bottom: 12px;
+    }
+
+    .fcs-overview {
+        font-size: 0.88rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .fcs-highlight-card {
+        padding: 12px 12px;
+        gap: 10px;
+    }
+
+    .fcs-hl-icon {
+        font-size: 1.15rem;
+    }
+
+    .fcs-hl-content h5 {
+        font-size: 0.84rem;
+        line-height: 1.3;
+    }
+
+    .fcs-hl-content p {
+        font-size: 0.78rem;
+        line-height: 1.45;
+    }
+
+    .fcs-tech-section {
+        margin-bottom: 22px;
+    }
+
+    .fcs-tech-section .tech-pill {
+        font-size: 0.68rem;
+        padding: 4px 8px;
+    }
+
+    .fcs-cta-group .fcs-btn {
+        padding: 12px 18px;
+        font-size: 0.88rem;
+    }
 }
