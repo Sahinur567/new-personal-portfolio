@@ -848,6 +848,34 @@ footer {
 }
 
 @media (max-width:768px) {
+    .flagship-case-study {
+        padding: 26px 18px;
+        margin-bottom: 36px;
+    }
+
+    .fcs-highlights-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .fcs-telemetry-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .fcs-stat-item:last-child {
+        grid-column: span 2;
+    }
+
+    .fcs-cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .fcs-cta-group .fcs-btn {
+        width: 100%;
+        justify-content: center;
+    }
     .nav-links {
         position: fixed;
         top: 0;

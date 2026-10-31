@@ -37,7 +37,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=25">
+    <link rel="stylesheet" href="style.css?v=26">
 </head>
 
 <body>
@@ -283,8 +283,125 @@
         <!-- Work Section -->
         <section id="work" class="work section-padding">
             <div class="section-header">
-                <h2>Featured <span class="gradient-text">Projects</span></h2>
-                <p>A selection of premium digital products and brand experiences.</p>
+                <h2>Featured <span class="gradient-text">Case Studies &amp; Projects</span></h2>
+                <p>Architecting enterprise platforms, biometric computer vision systems, and high-conversion brand experiences.</p>
+            </div>
+
+            <!-- Flagship Enterprise Case Study: SDBiometrix -->
+            <div class="glass-card flagship-case-study">
+                <div class="fcs-grid">
+                    <!-- Left: Interactive Visual Hardware & UI Showcase -->
+                    <div class="fcs-media-col">
+                        <div class="fcs-image-wrapper">
+                            <img src="assets/sdbiometrix_preview.jpg" alt="SDBiometrix Enterprise Biometric Child Attendance &amp; District Control Suite" class="fcs-image" loading="lazy">
+                            <div class="fcs-image-overlay"></div>
+                            <div class="fcs-status-pill">
+                                <span class="pulse-dot"></span>
+                                <span>Live Production System</span>
+                            </div>
+                        </div>
+
+                        <!-- Live Telemetry / Metric Indicators -->
+                        <div class="fcs-telemetry-row">
+                            <div class="fcs-stat-item">
+                                <div class="fcs-stat-val">&lt; 140ms</div>
+                                <div class="fcs-stat-lbl">Biometric Latency</div>
+                            </div>
+                            <div class="fcs-stat-item">
+                                <div class="fcs-stat-val">5-Role</div>
+                                <div class="fcs-stat-lbl">Multi-Tenant RBAC</div>
+                            </div>
+                            <div class="fcs-stat-item">
+                                <div class="fcs-stat-val">30-Day</div>
+                                <div class="fcs-stat-lbl">Crypto Restore Vault</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: In-Depth Architectural Case Study -->
+                    <div class="fcs-content-col">
+                        <div class="fcs-badge-group">
+                            <span class="fcs-badge category">Full-Stack Web, Mobile &amp; Computer Vision</span>
+                            <span class="fcs-badge saas">Enterprise SaaS</span>
+                            <span class="fcs-badge compliance">&#x1F6E1;&#xFE0F; Title 5 &bull; CalWORKs &bull; COPPA &bull; BIPA</span>
+                        </div>
+
+                        <h3 class="fcs-title">SDBiometrix — Enterprise Biometric Child Attendance &amp; District Control Suite <span class="fcs-version">(DaycareOS)</span></h3>
+
+                        <p class="fcs-overview">
+                            An enterprise-grade biometric verification and attendance management system designed for licensed daycare networks and regional child care districts. Replaces traditional paper sign-in sheets with sub-second (&lt;140ms) facial verification, real-time in-care headcount telemetry, automated 14-day pay period timesheet reporting, and a tamper-resistant 30-day cryptographic restore vault. Built in compliance with California Title 5, CalWORKs, COPPA, and BIPA privacy standards.
+                        </p>
+
+                        <!-- Key Architectural Highlights Grid -->
+                        <div class="fcs-highlights">
+                            <h4 class="fcs-section-title">Key Architectural Highlights</h4>
+                            <div class="fcs-highlights-grid">
+                                <div class="fcs-highlight-card">
+                                    <div class="fcs-hl-icon">&#x1F510;</div>
+                                    <div class="fcs-hl-content">
+                                        <h5>Multi-Tenant Role-Based Access Control (RBAC)</h5>
+                                        <p>Dedicated operational portals for Daycare Directors, Area Supervisors, Payroll Specialists, District Superintendents, and Platform Super Admins.</p>
+                                    </div>
+                                </div>
+
+                                <div class="fcs-highlight-card">
+                                    <div class="fcs-hl-icon">&#x1F9E0;</div>
+                                    <div class="fcs-hl-content">
+                                        <h5>Privacy-First Biometric Verification</h5>
+                                        <p>Facial landmark extraction using 512-dimensional floating-point vectors with zero raw child photos stored on disk.</p>
+                                    </div>
+                                </div>
+
+                                <div class="fcs-highlight-card">
+                                    <div class="fcs-hl-icon">&#x1F6E1;&#xFE0F;</div>
+                                    <div class="fcs-hl-content">
+                                        <h5>Cryptographic Audit &amp; Restore Vault</h5>
+                                        <p>HMAC-SHA256 tamper-evident digital signatures for soft-deletion, audit logging, and 30-day accidental deletion recovery.</p>
+                                    </div>
+                                </div>
+
+                                <div class="fcs-highlight-card">
+                                    <div class="fcs-hl-icon">&#x26A1;</div>
+                                    <div class="fcs-hl-content">
+                                        <h5>Production Edge Architecture</h5>
+                                        <p>Cloudflare SSL (TLS 1.3 256-bit encryption), Node.js/Express TypeScript backend, Supabase PostgreSQL with strict Row-Level Security (RLS), and Flutter native kiosk tablet client.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack Badges -->
+                        <div class="fcs-tech-section">
+                            <h4 class="fcs-section-title">Production Tech Stack</h4>
+                            <div class="tech-pills">
+                                <span class="tech-pill">Flutter &amp; Dart (Cross-Platform Android &amp; iOS)</span>
+                                <span class="tech-pill">Node.js &amp; Express (TypeScript)</span>
+                                <span class="tech-pill">PostgreSQL &amp; Supabase (Row-Level Security)</span>
+                                <span class="tech-pill">AWS Rekognition &amp; TensorFlow / Face-API</span>
+                                <span class="tech-pill">Cloudflare Edge &amp; Vercel Serverless</span>
+                                <span class="tech-pill">Docker, Git, REST APIs, JWT Auth</span>
+                            </div>
+                        </div>
+
+                        <!-- Call to Action Buttons -->
+                        <div class="fcs-cta-group">
+                            <a href="https://sdbiometrix.com" target="_blank" rel="noopener noreferrer" class="btn-primary fcs-btn magnetic" data-magnetic>
+                                <span>Live Website</span>
+                                <span class="btn-icon">&#x2197;</span>
+                            </a>
+                            <a href="https://sdbiometrix.com/#control-console" target="_blank" rel="noopener noreferrer" class="btn-secondary fcs-btn magnetic" data-magnetic>
+                                <span>Launch Web Console</span>
+                                <span class="btn-icon">&#x2197;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commercial Deployments Subheader -->
+            <div class="section-subheader">
+                <h3>Commercial Web &amp; Brand Systems</h3>
+                <p>Curated commercial platforms, luxury eCommerce, and consumer applications.</p>
             </div>
 
             <div class="projects-grid">
@@ -427,7 +544,7 @@
 
     <!-- Custom Scripts -->
     <script src="scene.js?v=5"></script>
-    <script src="main.js?v=23"></script>
+    <script src="main.js?v=24"></script>
 </body>
 
 </html>

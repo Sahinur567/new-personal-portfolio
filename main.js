@@ -229,6 +229,10 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollTrigger: { trigger: ".work", start: "top 80%" },
             opacity: 0, y: 50, rotateX: 8, duration: 1, ease: "power3.out"
         });
+        gsap.from(".flagship-case-study", {
+            scrollTrigger: { trigger: ".flagship-case-study", start: "top 85%" },
+            opacity: 0, y: 50, duration: 1, ease: "power3.out"
+        });
         gsap.from(".project-card", {
             scrollTrigger: { trigger: ".projects-grid", start: "top 85%" },
             opacity: 0, scale: 0.93, y: 60, rotateX: 4, duration: 0.9, stagger: 0.15, ease: "power3.out"
