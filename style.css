@@ -505,33 +505,42 @@ main {
 }
 
 /* ==========================================================================
-   Services Grid
+   Services Section & 5 & 5 Grid (Upper 5, Down 5)
    ========================================================================== */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
+.services {
+    max-width: 1560px;
+    margin: 0 auto;
 }
 
-@media (min-width: 1080px) {
-    .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
 
-    .services-grid > .service-card:nth-child(10):last-child {
-        grid-column: 2;
+@media (max-width: 1200px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
     }
 }
 
 .service-card {
-    padding: 38px 30px;
+    padding: 26px 18px;
     position: relative;
     overflow: hidden;
-    cursor: default;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    transition: transform 0.4s ease, border-color var(--transition-smooth), background var(--transition-smooth), box-shadow var(--transition-smooth);
+    justify-content: space-between;
+    height: 100%;
+    min-height: 380px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(20, 20, 28, 0.72) 0%, rgba(10, 10, 15, 0.88) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color var(--transition-smooth), background var(--transition-smooth), box-shadow 0.35s ease;
 }
 
 .service-card::before {
@@ -550,42 +559,51 @@ main {
     opacity: 1;
 }
 
+.service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(239, 68, 68, 0.38);
+    background: linear-gradient(135deg, rgba(26, 26, 36, 0.85) 0%, rgba(14, 14, 20, 0.95) 100%);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 28px rgba(239, 68, 68, 0.12);
+}
+
 .service-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
+    gap: 8px;
 }
 
 .service-card .icon {
-    font-size: 1.65rem;
+    font-size: 1.35rem;
     margin-bottom: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 54px;
-    height: 54px;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
     background: var(--gradient-accent-subtle);
-    border: 1px solid rgba(239, 68, 68, 0.15);
-    border-radius: 14px;
-    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.08);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.08);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
 }
 
 .service-card:hover .icon {
     transform: scale(1.08) translateY(-2px);
-    border-color: rgba(239, 68, 68, 0.4);
-    background: rgba(239, 68, 68, 0.16);
-    box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.45);
+    background: rgba(239, 68, 68, 0.18);
+    box-shadow: 0 8px 24px rgba(239, 68, 68, 0.22);
 }
 
 .service-badge {
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-family: var(--font-body);
     font-weight: 600;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
-    padding: 4px 11px;
+    padding: 3px 9px;
     border-radius: 100px;
     background: rgba(255, 255, 255, 0.04);
     color: var(--text-secondary);
@@ -593,6 +611,7 @@ main {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .service-card:hover .service-badge {
@@ -602,18 +621,19 @@ main {
 }
 
 .service-card h3 {
-    font-size: 1.22rem;
-    margin-bottom: 12px;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--text-primary);
+    line-height: 1.35;
 }
 
 .service-card p {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.68;
-    margin-bottom: 22px;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    margin-bottom: 18px;
     font-weight: 300;
 }
 
@@ -621,22 +641,23 @@ main {
 .tech-pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
+    gap: 5px;
     margin-top: auto;
-    padding-top: 16px;
+    padding-top: 14px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .tech-pill {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-family: var(--font-body);
     font-weight: 400;
     color: var(--text-muted);
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.07);
-    padding: 3px 9px;
+    padding: 3px 8px;
     border-radius: 6px;
     letter-spacing: 0.2px;
+    white-space: nowrap;
     transition: all 0.3s ease;
 }
 
@@ -1317,11 +1338,12 @@ footer {
 
     .services-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 16px;
     }
 
     .service-card {
-        padding: 30px 22px;
+        padding: 24px 18px;
+        min-height: auto;
     }
 
     .projects-grid {
@@ -1330,19 +1352,22 @@ footer {
 }
 
 /* ==========================================================================
-   Custom Cursor
+   Custom Cursor & Interactive Active States
    ========================================================================== */
 #cursor-dot {
     position: fixed;
     top: 0;
     left: 0;
-    width: 5px;
-    height: 5px;
-    background: var(--text-primary);
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.05s ease;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 }
 
 #cursor-ring {
@@ -1351,24 +1376,42 @@ footer {
     left: 0;
     width: 36px;
     height: 36px;
-    border: 1px solid rgba(239, 68, 68, 0.4);
+    border: 1.5px solid rgba(239, 68, 68, 0.5);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s;
+    opacity: 0;
+    transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                background-color 0.25s ease,
+                box-shadow 0.25s ease,
+                opacity 0.3s ease;
 }
 
-body.custom-cursor-active {
-    cursor: none;
+#cursor-ring.cursor-active {
+    width: 52px;
+    height: 52px;
+    border-color: rgba(239, 68, 68, 0.85);
+    background-color: rgba(239, 68, 68, 0.1);
+    box-shadow: 0 0 24px rgba(239, 68, 68, 0.35);
 }
 
-@media (max-width:900px),
-(pointer:coarse) {
-    body {
-        cursor: auto !important;
-    }
+#cursor-ring.cursor-clicking {
+    transform: translate(-50%, -50%) scale(0.75);
+}
 
+/* Ensure proper mouse cursor is kept active and visible */
+body {
+    cursor: default;
+}
+
+a, button, .btn-primary, .btn-secondary, .magnetic, .service-card, .project-card, .video-card, .flagship-case-study, .hamburger, .tech-pill, input, textarea {
+    cursor: pointer;
+}
+
+@media (max-width: 900px), (pointer: coarse) {
     #cursor-dot,
     #cursor-ring {
         display: none !important;
@@ -1431,6 +1474,53 @@ body.custom-cursor-active {
     display: inline-block;
 }
 @media (max-width:480px) {
+    .services-grid {
+        gap: 14px;
+    }
+
+    .service-card {
+        padding: 20px 16px;
+        border-radius: 14px;
+        min-height: auto;
+    }
+
+    .service-card-top {
+        margin-bottom: 14px;
+    }
+
+    .service-card .icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .service-badge {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+    }
+
+    .service-card h3 {
+        font-size: 1.05rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+
+    .service-card p {
+        font-size: 0.82rem;
+        line-height: 1.55;
+        margin-bottom: 14px;
+    }
+
+    .tech-pills {
+        gap: 4px;
+        padding-top: 12px;
+    }
+
+    .tech-pill {
+        font-size: 0.65rem;
+        padding: 2px 7px;
+    }
+
     .flagship-case-study {
         padding: 20px 14px;
         margin-bottom: 28px;

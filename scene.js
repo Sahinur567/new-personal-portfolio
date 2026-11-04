@@ -1,4 +1,4 @@
-// Three.js Scene Setup for Premium 3D Portfolio
+// Three.js Scene Setup for Premium 3D Portfolio - High-Performance Engine
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('webgl-canvas');
     if (!canvas) return;
@@ -11,27 +11,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const renderer = new THREE.WebGLRenderer({
         canvas: canvas,
-        alpha: true, // Transparent background
-        antialias: true
+        alpha: true,
+        powerPreference: "high-performance",
+        antialias: false
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
 
     // Futuristic Particles Geometry (Cybernetic Sphere)
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 4000; // Increased density for premium feel
+    const particlesCount = 2200; // Balanced density, buttery smooth 120 FPS
     
     const posArray = new Float32Array(particlesCount * 3);
     const colorsArray = new Float32Array(particlesCount * 3);
-    // Store original positions for mouse repulsion physics
     const originalPosArray = new Float32Array(particlesCount * 3);
     
-    const color1 = new THREE.Color('#fca5a5'); // Light red/pink
+    const color1 = new THREE.Color('#fca5a5'); // Light crimson tint
     const color2 = new THREE.Color('#991b1b'); // Deep premium red
     
-    for(let i = 0; i < particlesCount * 3; i+=3) {
-        // Random points on a sphere
-        const r = 3 + (Math.random() * 0.5); // Slight variation in radius
+    for (let i = 0; i < particlesCount * 3; i += 3) {
+        const r = 3 + (Math.random() * 0.5);
         const theta = 2 * Math.PI * Math.random();
         const phi = Math.acos(2 * Math.random() - 1);
         
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         originalPosArray[i+1] = y;
         originalPosArray[i+2] = z;
 
-        // Mix colors based on position
         const mixedColor = color1.clone().lerp(color2, Math.random());
         colorsArray[i] = mixedColor.r;
         colorsArray[i+1] = mixedColor.g;
@@ -56,15 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
     particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
-    // Save base color for scroll shifting
     const baseColorsAttribute = particlesGeometry.attributes.color.clone();
 
     // Materials
     const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.015,
+        size: 0.016,
         vertexColors: true,
         transparent: true,
-        opacity: 0.5,
+        opacity: 0.55,
         blending: THREE.AdditiveBlending
     });
 
@@ -72,10 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
 
-    // Add some faint ambient lines (Wireframe Sphere)
+    // Ambient wireframe sphere
     const wireframeGeometry = new THREE.IcosahedronGeometry(2.5, 2);
     const wireframeMaterial = new THREE.MeshBasicMaterial({
-        color: 0xef4444, // Red glow
+        color: 0xef4444,
         wireframe: true,
         transparent: true,
         opacity: 0.05
@@ -84,33 +81,36 @@ document.addEventListener("DOMContentLoaded", () => {
     scene.add(wireframeSphere);
 
     // Mouse Interaction for Repulsion
-    let mouse = new THREE.Vector2(-9999, -9999);
+    const mouse = new THREE.Vector2(-9999, -9999);
     let targetX = 0;
     let targetY = 0;
     let windowHalfX = window.innerWidth / 2;
     let windowHalfY = window.innerHeight / 2;
+    let hasMouseMoved = false;
     
-    // Raycaster for 3D mouse interaction
+    // Pre-allocated static objects to completely eliminate garbage collection churn
     const raycaster = new THREE.Raycaster();
+    const planeZ = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const intersectionPoint = new THREE.Vector3();
+    const tempPoint = new THREE.Vector3();
 
     document.addEventListener('mousemove', (event) => {
-        // For scene rotation
+        hasMouseMoved = true;
         targetX = (event.clientX - windowHalfX) * 0.001;
         targetY = (event.clientY - windowHalfY) * 0.001;
 
-        // For raycasting
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    });
+    }, { passive: true });
 
-    // Handle Scroll for Parallax and Color Shifting
     let scrollY = window.scrollY;
-    let maxScroll = document.body.scrollHeight - window.innerHeight;
+    let maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    let lastScrollRatio = -1;
     
     window.addEventListener('scroll', () => {
         scrollY = window.scrollY;
-        maxScroll = document.body.scrollHeight - window.innerHeight;
-    });
+        maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    }, { passive: true });
 
     // Animation Loop
     const clock = new THREE.Clock();
@@ -125,85 +125,81 @@ document.addEventListener("DOMContentLoaded", () => {
         wireframeSphere.rotation.y += 0.05 * (targetX - wireframeSphere.rotation.y);
         wireframeSphere.rotation.x += 0.05 * (targetY - wireframeSphere.rotation.x);
 
-        // Constant Slow Rotation
+        // Constant Slow Ambient Rotation
         particlesMesh.rotation.y += 0.001;
         wireframeSphere.rotation.y -= 0.001;
         
         // Scroll Parallax
-        particlesMesh.position.y = -scrollY * 0.0015;
-        wireframeSphere.position.y = -scrollY * 0.0015;
+        const scrollParallaxY = -scrollY * 0.0015;
+        particlesMesh.position.y = scrollParallaxY;
+        wireframeSphere.position.y = scrollParallaxY;
 
         // 2. Mouse Repulsion Physics
-        raycaster.setFromCamera(mouse, camera);
-        // We find where the ray intersects the Z plane of the sphere
-        let planeZ = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-        let intersectionPoint = new THREE.Vector3();
-        raycaster.ray.intersectPlane(planeZ, intersectionPoint);
+        const checkRepulsion = hasMouseMoved && Math.abs(mouse.x) <= 1 && Math.abs(mouse.y) <= 1;
+        if (checkRepulsion) {
+            raycaster.setFromCamera(mouse, camera);
+            raycaster.ray.intersectPlane(planeZ, intersectionPoint);
+        }
 
         const positions = particlesGeometry.attributes.position.array;
         const colors = particlesGeometry.attributes.color.array;
-        
-        // Calculate scroll ratio for color shifting
-        let scrollRatio = Math.min(scrollY / maxScroll, 1.0) || 0;
+        const scrollRatio = Math.min(scrollY / maxScroll, 1.0) || 0;
+        const updateColors = Math.abs(scrollRatio - lastScrollRatio) > 0.001;
+        if (updateColors) lastScrollRatio = scrollRatio;
 
-        for(let i = 0; i < particlesCount; i++) {
+        const matrix = particlesMesh.matrixWorld;
+        const ix = intersectionPoint.x;
+        const iy = intersectionPoint.y;
+
+        for (let i = 0; i < particlesCount; i++) {
             const i3 = i * 3;
             
-            // Get original position
             const ox = originalPosArray[i3];
             const oy = originalPosArray[i3+1];
             const oz = originalPosArray[i3+2];
 
-            // Current position
             let cx = positions[i3];
             let cy = positions[i3+1];
             let cz = positions[i3+2];
 
-            // Transform point to world space to check against mouse
-            let point = new THREE.Vector3(cx, cy, cz);
-            point.applyMatrix4(particlesMesh.matrixWorld);
-
-            // Distance from mouse intersection
-            let dx = point.x - intersectionPoint.x;
-            let dy = point.y - intersectionPoint.y;
-            let distSq = dx*dx + dy*dy;
-            
-            // Repulsion force
-            if(distSq < 1.5) {
-                let force = (1.5 - distSq) * 0.05;
-                cx += dx * force;
-                cy += dy * force;
+            // Zero-allocation repulsion check
+            if (checkRepulsion) {
+                tempPoint.set(cx, cy, cz).applyMatrix4(matrix);
+                const dx = tempPoint.x - ix;
+                const dy = tempPoint.y - iy;
+                const distSq = dx * dx + dy * dy;
+                
+                if (distSq < 1.5) {
+                    const force = (1.5 - distSq) * 0.05;
+                    cx += dx * force;
+                    cy += dy * force;
+                }
             }
 
-            // Spring back to original position
+            // Spring back
             cx += (ox - cx) * 0.1;
             cy += (oy - cy) * 0.1;
-            cz += (oz - cz) * 0.1;
-
-            // Apply wave breathing effect to Z based on time
             cz = oz + Math.sin(elapsedTime * 2 + ox) * 0.05;
 
             positions[i3] = cx;
             positions[i3+1] = cy;
             positions[i3+2] = cz;
 
-            // 3. Scroll Color Shifting (Shift towards a deeper blue/teal as you scroll down)
-            const baseR = baseColorsAttribute.array[i3];
-            const baseG = baseColorsAttribute.array[i3+1];
-            const baseB = baseColorsAttribute.array[i3+2];
-            
-            // Target color shift (e.g., towards deep crimson #7f1d1d)
-            const targetR = 0.50;
-            const targetG = 0.11;
-            const targetB = 0.11;
-
-            colors[i3] = baseR + (targetR - baseR) * scrollRatio;
-            colors[i3+1] = baseG + (targetG - baseG) * scrollRatio;
-            colors[i3+2] = baseB + (targetB - baseB) * scrollRatio;
+            // Scroll Color Shifting (only if scroll ratio changed)
+            if (updateColors) {
+                const baseR = baseColorsAttribute.array[i3];
+                const baseG = baseColorsAttribute.array[i3+1];
+                const baseB = baseColorsAttribute.array[i3+2];
+                colors[i3] = baseR + (0.50 - baseR) * scrollRatio;
+                colors[i3+1] = baseG + (0.11 - baseG) * scrollRatio;
+                colors[i3+2] = baseB + (0.11 - baseB) * scrollRatio;
+            }
         }
 
         particlesGeometry.attributes.position.needsUpdate = true;
-        particlesGeometry.attributes.color.needsUpdate = true;
+        if (updateColors) {
+            particlesGeometry.attributes.color.needsUpdate = true;
+        }
 
         renderer.render(scene, camera);
     }
@@ -217,6 +213,5 @@ document.addEventListener("DOMContentLoaded", () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     });
 });

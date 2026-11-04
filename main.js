@@ -1,20 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     // =========================================================================
-    // 0. Preloader
+    // 0. Preloader & Smooth Entrance
     // =========================================================================
     const fill = document.getElementById('pl-fill');
     const preloader = document.getElementById('preloader');
 
+    if (fill) fill.style.width = '100%';
     setTimeout(() => {
-        fill.style.width = '100%';
-        setTimeout(() => {
+        if (preloader) {
             preloader.style.opacity = '0';
+            preloader.style.pointerEvents = 'none';
             setTimeout(() => {
                 preloader.style.display = 'none';
-                initAll();
-            }, 800);
-        }, 400);
-    }, 100);
+            }, 600);
+        }
+        initAll();
+    }, 280);
 
     function initAll() {
         initGSAPAnimations();
@@ -23,25 +24,69 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================================
-    // 1. Custom Cursor
+    // 1. Custom Cursor & Interactive Active States
     // =========================================================================
     const dot = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
     const isTouch = matchMedia('(pointer: coarse)').matches;
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let rx = mx, ry = my;
+    let mx = -100, my = -100;
+    let rx = -100, ry = -100;
+    let cursorVisible = false;
 
     if (!isTouch && dot && ring) {
-        document.body.classList.add('custom-cursor-active');
         document.addEventListener('mousemove', e => {
             mx = e.clientX;
             my = e.clientY;
+            if (!cursorVisible) {
+                cursorVisible = true;
+                rx = mx;
+                ry = my;
+                dot.style.opacity = '1';
+                ring.style.opacity = '1';
+            }
+        }, { passive: true });
+
+        document.addEventListener('mouseleave', () => {
+            cursorVisible = false;
+            dot.style.opacity = '0';
+            ring.style.opacity = '0';
         });
+
+        document.addEventListener('mouseenter', () => {
+            cursorVisible = true;
+            dot.style.opacity = '1';
+            ring.style.opacity = '1';
+        });
+
+        document.addEventListener('mousedown', () => {
+            ring.classList.add('cursor-clicking');
+        });
+
+        document.addEventListener('mouseup', () => {
+            ring.classList.remove('cursor-clicking');
+        });
+
+        // Delegate hover events for all interactive interface elements
+        const interactiveSelector = 'a, button, .btn-primary, .btn-secondary, .magnetic, .service-card, .project-card, .video-card, .flagship-case-study, .hamburger, .tech-pill, input, textarea';
+        document.addEventListener('mouseover', e => {
+            if (e.target.closest(interactiveSelector)) {
+                ring.classList.add('cursor-active');
+            }
+        });
+
+        document.addEventListener('mouseout', e => {
+            if (e.target.closest(interactiveSelector)) {
+                ring.classList.remove('cursor-active');
+            }
+        });
+
         function renderCursor() {
-            dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-            rx += (mx - rx) * 0.15;
-            ry += (my - ry) * 0.15;
-            ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+            if (cursorVisible) {
+                dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+                rx += (mx - rx) * 0.2;
+                ry += (my - ry) * 0.2;
+                ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+            }
             requestAnimationFrame(renderCursor);
         }
         renderCursor();
@@ -69,51 +114,58 @@ document.addEventListener("DOMContentLoaded", () => {
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    }, { passive: true });
 
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
         });
-    });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    }
 
     // =========================================================================
-    // 4. GSAP Animations + Image Sequence
+    // 4. GSAP Animations + Progressive Image Sequence
     // =========================================================================
     gsap.registerPlugin(ScrollTrigger);
 
     function initGSAPAnimations() {
-        // --- Hero entrance ---
+        // --- Hero entrance with clean hardware acceleration ---
         const heroTl = gsap.timeline();
         heroTl
-            .from(".subtitle", { opacity: 0, y: 30, duration: 1.2, ease: "expo.out" })
-            .from(".title", { opacity: 0, y: 40, duration: 1.5, ease: "expo.out" }, "-=1.0")
-            .from(".description", { opacity: 0, y: 25, duration: 1.2, ease: "expo.out" }, "-=1.0")
-            .from(".cta-group", { opacity: 0, y: 25, duration: 1.2, ease: "expo.out" }, "-=1.0")
-            .from(".db-item", { opacity: 0, y: 35, stagger: 0.1, duration: 1.2, ease: "expo.out" }, "-=0.8");
+            .from(".subtitle", { opacity: 0, y: 30, duration: 1.0, ease: "expo.out", clearProps: "all" })
+            .from(".title", { opacity: 0, y: 40, duration: 1.2, ease: "expo.out", clearProps: "all" }, "-=0.8")
+            .from(".description", { opacity: 0, y: 25, duration: 1.0, ease: "expo.out", clearProps: "all" }, "-=0.8")
+            .from(".cta-group", { opacity: 0, y: 25, duration: 1.0, ease: "expo.out", clearProps: "all" }, "-=0.8")
+            .from(".db-item", { opacity: 0, y: 35, stagger: 0.08, duration: 1.0, ease: "expo.out", clearProps: "all" }, "-=0.7");
 
-        // --- IMAGE SEQUENCE (Full 3D Background) ---
+        // --- IMAGE SEQUENCE (Full 3D Background - High Performance Streaming) ---
         const seqCanvas = document.getElementById("sequence-canvas");
         if (seqCanvas) {
             const ctx = seqCanvas.getContext("2d");
             const frameCount = 300;
             const currentFrame = i => `assets/sequence/ezgif-frame-${(i + 1).toString().padStart(3, '0')}.jpg`;
 
-            const images = [];
+            const images = new Array(frameCount);
             const seq = { frame: 0 };
 
-            for (let i = 0; i < frameCount; i++) {
+            function loadImage(index) {
+                if (images[index]) return images[index];
                 const img = new Image();
-                img.src = currentFrame(i);
-                images.push(img);
+                img.src = currentFrame(index);
+                images[index] = img;
+                return img;
             }
+
+            // Load frame 0 immediately for instant render without blocking
+            const firstImg = loadImage(0);
 
             function setupCanvas() {
                 const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -126,8 +178,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             function renderSeq() {
-                const img = images[seq.frame];
-                if (!img || !img.complete || !img.naturalWidth) return;
+                const frameIndex = Math.min(Math.max(0, Math.round(seq.frame)), frameCount - 1);
+                let img = images[frameIndex];
+                if (!img || !img.complete || !img.naturalWidth) {
+                    img = loadImage(frameIndex);
+                    img.onload = renderSeq;
+                    return;
+                }
 
                 const dpr = Math.min(window.devicePixelRatio || 1, 2);
                 const cw = seqCanvas.width / dpr;
@@ -151,7 +208,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.drawImage(img, dx, dy, dw, dh);
             }
 
-            images[0].onload = () => { setupCanvas(); renderSeq(); };
+            if (firstImg.complete) {
+                setupCanvas();
+                renderSeq();
+            } else {
+                firstImg.onload = () => { setupCanvas(); renderSeq(); };
+            }
+
+            // Stream remaining frames in background idle slices so the main thread never lags
+            let preloadIndex = 1;
+            function preloadNextBatch() {
+                const limit = Math.min(preloadIndex + 8, frameCount);
+                for (; preloadIndex < limit; preloadIndex++) {
+                    loadImage(preloadIndex);
+                }
+                if (preloadIndex < frameCount) {
+                    if (window.requestIdleCallback) {
+                        requestIdleCallback(preloadNextBatch, { timeout: 150 });
+                    } else {
+                        setTimeout(preloadNextBatch, 35);
+                    }
+                }
+            }
+            setTimeout(preloadNextBatch, 400);
 
             // Scrub sequence on scroll - finishes as Services section is reached
             gsap.to(seq, {
@@ -187,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setupCanvas();
                     renderSeq();
                 }
-            });
+            }, { passive: true });
         }
 
         // --- Hero parallax: content moves faster than sequence ---
@@ -222,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         gsap.from(".service-card", {
             scrollTrigger: { trigger: ".services-grid", start: "top 85%" },
-            opacity: 0, y: 60, rotateX: 5, duration: 0.8, stagger: 0.12, ease: "power3.out"
+            opacity: 0, y: 50, duration: 0.7, stagger: 0.08, ease: "power3.out"
         });
 
         gsap.from(".work .section-header", {
@@ -259,32 +338,30 @@ document.addEventListener("DOMContentLoaded", () => {
         let targetMX = 0, targetMY = 0;
 
         document.addEventListener('mousemove', e => {
-            // Normalize to -1 to 1
             targetMX = (e.clientX / window.innerWidth - 0.5) * 2;
             targetMY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
+        }, { passive: true });
 
         const heroContent = document.querySelector('.hero-content');
         const dataBar = document.querySelector('.data-bar');
         const seqCanvas = document.getElementById('sequence-canvas');
 
         function animateParallax() {
-            mouseX += (targetMX - mouseX) * 0.04;
-            mouseY += (targetMY - mouseY) * 0.04;
+            // Only update if near the top
+            if (window.scrollY < window.innerHeight) {
+                mouseX += (targetMX - mouseX) * 0.04;
+                mouseY += (targetMY - mouseY) * 0.04;
 
-            // Hero content moves opposite to mouse (foreground depth)
-            if (heroContent) {
-                heroContent.style.transform = `translate(${mouseX * -12}px, ${mouseY * -8}px)`;
+                if (heroContent) {
+                    heroContent.style.transform = `translate3d(${mouseX * -12}px, ${mouseY * -8}px, 0)`;
+                }
+                if (dataBar) {
+                    dataBar.style.transform = `translate3d(${mouseX * -6}px, ${mouseY * -4}px, 0)`;
+                }
+                if (seqCanvas) {
+                    seqCanvas.style.transform = `translate3d(${mouseX * 5}px, ${mouseY * 4}px, 0)`;
+                }
             }
-            if (dataBar) {
-                dataBar.style.transform = `translate(${mouseX * -6}px, ${mouseY * -4}px)`;
-            }
-
-            // Sequence canvas shifts subtly with mouse (background depth)
-            if (seqCanvas) {
-                seqCanvas.style.transform = `translate(${mouseX * 5}px, ${mouseY * 4}px)`;
-            }
-
             requestAnimationFrame(animateParallax);
         }
         animateParallax();
@@ -305,14 +382,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                const rotateX = ((y - centerY) / centerY) * -8;
-                const rotateY = ((x - centerX) / centerX) * 8;
+                const rotateX = ((y - centerY) / centerY) * -6;
+                const rotateY = ((x - centerX) / centerX) * 6;
 
-                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) translateZ(8px)`;
             });
 
             card.addEventListener('mouseleave', function () {
-                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+                card.style.transform = '';
             });
         });
     }
