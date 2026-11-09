@@ -314,7 +314,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         gsap.from(".project-card", {
             scrollTrigger: { trigger: ".projects-grid", start: "top 85%" },
-            opacity: 0, scale: 0.93, y: 60, rotateX: 4, duration: 0.9, stagger: 0.15, ease: "power3.out"
+            opacity: 0, scale: 0.93, y: 60, rotateX: 4, duration: 0.9, stagger: 0.15, ease: "power3.out",
+            clearProps: "all"
         });
 
         gsap.from(".video-card", {

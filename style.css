@@ -1010,6 +1010,9 @@ main {
     display: flex;
     flex-direction: column;
     border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 .project-image-placeholder {
@@ -1026,6 +1029,7 @@ main {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(5, 5, 7, 0.5) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .project-card:hover .project-image-placeholder {
@@ -1056,6 +1060,9 @@ main {
 }
 
 .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     font-weight: 600;
     font-size: 0.85rem;
     font-family: var(--font-heading);
@@ -1067,8 +1074,9 @@ main {
     background-clip: text;
 }
 
-.project-link:hover {
-    opacity: 0.7;
+.project-card:hover .project-link {
+    opacity: 0.75;
+    transform: translateX(4px);
 }
 
 /* Video Grid */
